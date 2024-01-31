@@ -10,4 +10,9 @@ class Article extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'slug'];
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }
