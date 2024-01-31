@@ -1,14 +1,11 @@
 <?php
 
-use App\Models\Episode;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    $comments = Episode::find(1)->comments;
-    dd($comments);
     return view('welcome');
 });
 
