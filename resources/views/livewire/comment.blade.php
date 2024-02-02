@@ -1,4 +1,7 @@
-<div x-data="{ isReplying: @entangle('isReplying') }">
+<div x-data="{
+    isReplying: @entangle('isReplying'),
+    isEditing: @entangle('isEditing')
+}">
     <article class=" my-6 text-base bg-white rounded-lg">
         <footer class="flex justify-between items-center mb-2">
             <div class="flex items-center">
@@ -13,9 +16,31 @@
             </div>
         </footer>
         <!-- Comment Body -->
-        <p class="text-gray-500">
+        <p class="text-gray-500" x-show="!isEditing">
             {{ $comment->body }}
         </p>
+
+        {{-- Update form --}}
+        <form class="mb-6 ml-8" x-show="isEditing" x-transition wire:submit="storeReply">
+            <label for="comment" class="sr-only">Your comment</label>
+            <textarea wire:model="form.body" style="resize: none;" placeholder="Write a comment..." rows="2"
+                class="shadow-sm block rounded-md w-full border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500
+            @error('form.body')
+                text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500 border-red-300
+                @enderror"></textarea>
+            @error('form.body')
+                <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
+            @enderror
+            <button type="submit"
+                class="inline-flex items-center py-1.5 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-blue-800 mt-4">
+                Update
+            </button>
+            <button type="button" @click="isEditing=!isEditing"
+                class="rounded-lg bg-white px-3 py-1.5 text-xs font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                Cancel
+            </button>
+        </form>
+
         <!--  Reply,Edit, Delete Section -->
         <div class="flex items-center mt-4 space-x-4">
             @if (!$comment->parent_id)
@@ -30,7 +55,8 @@
                     Reply
                 </button>
             @endif
-            <button type="button" class="flex items-center text-sm text-gray-500 hover:underline">
+            <button @click="isEditing=true" type="button"
+                class="flex items-center text-sm text-gray-500 hover:underline">
                 <svg class="mr-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"

@@ -10,7 +10,7 @@ class Comment extends Component
 {
     public CommentModel $comment;
 
-    public $isReplying = false;
+    public $isReplying = false, $isEditing = false;
 
     public ReplyForm $form;
 
