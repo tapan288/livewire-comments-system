@@ -50,10 +50,16 @@
     </article>
 
     {{-- Reply form --}}
-    <form class="mb-6 ml-8" x-show="isReplying" x-transition>
+    <form class="mb-6 ml-8" x-show="isReplying" x-transition wire:submit="storeReply">
         <label for="comment" class="sr-only">Your comment</label>
-        <textarea style="resize: none;" placeholder="Write a reply..." rows="2"
-            class="shadow-sm block rounded-md w-full border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500"></textarea>
+        <textarea wire:model="form.body" style="resize: none;" placeholder="Write a reply..." rows="2"
+            class="shadow-sm block rounded-md w-full border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500
+            @error('form.body')
+                text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500 border-red-300
+                @enderror"></textarea>
+        @error('form.body')
+            <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
+        @enderror
         <button type="submit"
             class="inline-flex items-center py-1.5 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-blue-800 mt-4">
             Reply
