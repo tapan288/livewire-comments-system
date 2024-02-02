@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ isReplying: false }">
     <article class=" my-6 text-base bg-white rounded-lg">
         <footer class="flex justify-between items-center mb-2">
             <div class="flex items-center">
@@ -19,7 +19,8 @@
         <!--  Reply,Edit, Delete Section -->
         <div class="flex items-center mt-4 space-x-4">
             @if (!$comment->parent_id)
-                <button type="button" class="flex items-center text-sm text-gray-500 hover:underline">
+                <button @click="isReplying=!isReplying" type="button"
+                    class="flex items-center text-sm text-gray-500 hover:underline">
                     <svg aria-hidden="true" class="mr-1 w-4 h-4" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -47,6 +48,21 @@
             </button>
         </div>
     </article>
+
+    {{-- Reply form --}}
+    <form class="mb-6 ml-8" x-show="isReplying" x-transition>
+        <label for="comment" class="sr-only">Your comment</label>
+        <textarea style="resize: none;" placeholder="Write a reply..." rows="2"
+            class="shadow-sm block rounded-md w-full border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500"></textarea>
+        <button type="submit"
+            class="inline-flex items-center py-1.5 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-blue-800 mt-4">
+            Reply
+        </button>
+        <button type="button" @click="isReplying=!isReplying"
+            class="rounded-lg bg-white px-3 py-1.5 text-xs font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+            Cancel
+        </button>
+    </form>
 
     <div class="ml-8 mt-6">
         @foreach ($comment->replies as $reply)
