@@ -1,4 +1,4 @@
-<div x-data="{ isReplying: false }">
+<div x-data="{ isReplying: @entangle('isReplying') }">
     <article class=" my-6 text-base bg-white rounded-lg">
         <footer class="flex justify-between items-center mb-2">
             <div class="flex items-center">

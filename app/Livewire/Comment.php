@@ -10,11 +10,15 @@ class Comment extends Component
 {
     public CommentModel $comment;
 
+    public $isReplying = false;
+
     public ReplyForm $form;
 
     public function storeReply()
     {
         $this->form->storeReply($this->comment);
+
+        $this->isReplying = false;
     }
 
     public function render()
