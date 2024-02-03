@@ -2,11 +2,11 @@
 
 namespace App\Livewire;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use App\Livewire\Forms\ReplyForm;
 use App\Models\Comment as CommentModel;
 use App\Livewire\Forms\UpdateCommentForm;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Comment extends Component
 {
