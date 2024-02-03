@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use App\Livewire\Forms\ReplyForm;
 use App\Models\Comment as CommentModel;
@@ -9,6 +10,8 @@ use App\Livewire\Forms\UpdateCommentForm;
 
 class Comment extends Component
 {
+    use AuthorizesRequests;
+
     public CommentModel $comment;
 
     public $isReplying = false, $isEditing = false;
@@ -26,6 +29,8 @@ class Comment extends Component
 
     public function updateComment()
     {
+        $this->authorize('update', $this->comment);
+
         $this->updateForm->updateComment($this->comment);
 
         $this->isEditing = false;
