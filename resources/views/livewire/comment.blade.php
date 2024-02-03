@@ -1,6 +1,6 @@
 <div x-data="{
     isReplying: @entangle('isReplying'),
-    isEditing: @entangle('isEditing')
+    isEditing: @entangle('isEditing').live,
 }">
     <article class=" my-6 text-base bg-white rounded-lg">
         <footer class="flex justify-between items-center mb-2">
@@ -21,21 +21,21 @@
         </p>
 
         {{-- Update form --}}
-        <form class="mb-6 ml-8" x-show="isEditing" x-transition wire:submit="storeReply">
+        <form class="mb-6" x-show="isEditing" x-transition wire:submit="updateComment">
             <label for="comment" class="sr-only">Your comment</label>
-            <textarea wire:model="form.body" style="resize: none;" placeholder="Write a comment..." rows="2"
+            <textarea wire:model="updateForm.body" style="resize: none;" placeholder="Write a comment..." rows="2"
                 class="shadow-sm block rounded-md w-full border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500
-            @error('form.body')
+            @error('updateForm.body')
                 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500 border-red-300
                 @enderror"></textarea>
-            @error('form.body')
+            @error('updateForm.body')
                 <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
             @enderror
             <button type="submit"
                 class="inline-flex items-center py-1.5 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-blue-800 mt-4">
                 Update
             </button>
-            <button type="button" @click="isEditing=!isEditing"
+            <button type="button" @click="isEditing=false"
                 class="rounded-lg bg-white px-3 py-1.5 text-xs font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                 Cancel
             </button>
