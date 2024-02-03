@@ -11,7 +11,7 @@
                     {{ $comment->user->name }}
                 </p>
                 <p class="text-sm text-gray-600">
-                    {{ $comment->created_at->diffForHumans() }}
+                    {{ $comment->presenter()->relativeCreatedAt() }}
                 </p>
             </div>
         </footer>
