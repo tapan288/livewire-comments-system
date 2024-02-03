@@ -4,11 +4,15 @@ namespace App\Livewire;
 
 use App\Models\Comment;
 use Livewire\Component;
+use Livewire\Attributes\On;
 use App\Livewire\Forms\CommentForm;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Comments extends Component
 {
+    use AuthorizesRequests;
+
     public Model $model;
 
     public CommentForm $form;
@@ -18,9 +22,10 @@ class Comments extends Component
         $this->form->storeComment($this->model);
     }
 
-    public function deleteComment($comment_id)
+    #[On('deleteComment')]
+    public function deleteComment($comment)
     {
-        $comment = Comment::find($comment_id);
+        $comment = Comment::find($comment);
 
         $this->authorize('delete', $comment);
 

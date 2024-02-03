@@ -12,6 +12,10 @@ class Comment extends Component
 {
     use AuthorizesRequests;
 
+    protected $listeners = [
+        'deleteComment' => '$refresh',
+    ];
+
     public CommentModel $comment;
 
     public $isReplying = false, $isEditing = false;
