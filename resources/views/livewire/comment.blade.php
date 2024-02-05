@@ -43,7 +43,7 @@
 
         <!--  Reply,Edit, Delete Section -->
         <div class="flex items-center mt-4 space-x-4">
-            @if (!$comment->parent_id)
+            @if (!$comment->isReply())
                 <button @click="isReplying=!isReplying" type="button"
                     class="flex items-center text-sm text-gray-500 hover:underline">
                     <svg aria-hidden="true" class="mr-1 w-4 h-4" fill="none" stroke="currentColor"

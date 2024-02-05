@@ -26,6 +26,10 @@ class Comment extends Component
 
     public function storeReply()
     {
+        if ($this->comment->isReply()) {
+            return;
+        }
+
         $this->form->storeReply($this->comment);
 
         $this->isReplying = false;
