@@ -21,7 +21,7 @@
         </p>
 
         {{-- Update form --}}
-        <form class="mb-6" x-show="isEditing" x-transition wire:submit="updateComment">
+        <form class="mb-6" x-show="isEditing" x-transition wire:submit="updateComment" x-cloak>
             <label for="comment" class="sr-only">Your comment</label>
             <textarea wire:model="updateForm.body" style="resize: none;" placeholder="Write a comment..." rows="2"
                 class="shadow-sm block rounded-md w-full border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500
@@ -83,7 +83,7 @@
     </article>
 
     {{-- Reply form --}}
-    <form class="mb-6 ml-8" x-show="isReplying" x-transition wire:submit="storeReply">
+    <form class="mb-6 ml-8" x-show="isReplying" x-transition wire:submit="storeReply" x-cloak>
         <label for="comment" class="sr-only">Your comment</label>
         <textarea wire:model="form.body" style="resize: none;" placeholder="Write a reply..." rows="2"
             class="shadow-sm block rounded-md w-full border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500

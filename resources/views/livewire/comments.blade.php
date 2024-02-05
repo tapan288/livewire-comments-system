@@ -5,14 +5,18 @@
                 Discussion (3)
             </h2>
         </div>
-        {{--  comment body --}}
-        @foreach ($comments as $comment)
-            @livewire('comment', ['comment' => $comment], key($comment->id))
-        @endforeach
 
-        <div class="my-5">
-            {{ $comments->links() }}
-        </div>
+        @if ($comments->count())
+            @foreach ($comments as $comment)
+                @livewire('comment', ['comment' => $comment], key($comment->id))
+            @endforeach
+
+            <div class="my-5">
+                {{ $comments->links() }}
+            </div>
+        @else
+            <p class="text-gray-900 my-5">No Comments Yet</p>
+        @endif
 
         {{-- main comment form --}}
         <form class="mb-6" wire:submit="postComment">
